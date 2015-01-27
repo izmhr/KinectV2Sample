@@ -2,8 +2,7 @@
 
 #include "ofMain.h"
 #include <Kinect.h>
-
-//#define USE_OF_IMAGE
+#include <Kinect.Face.h>
 
 class ofApp : public ofBaseApp{
 
@@ -23,24 +22,35 @@ public:
 	void gotMessage(ofMessage msg);
 
 private:
+	void	ProcessFaces();
+	HRESULT	UpdateBodyData(IBody** ppBodies);
+	void	DrawFaceFrameResult();
+
+	static void ExtractFaceRotationInDegrees(const Vector4* pQuaternion, int* pPitch, int* pYaw, int* pRoll);
+
 	IKinectSensor*		sensor;
+	ICoordinateMapper*	coordinateMapper;
 	IColorFrameReader*	colorFrameReader;
-#ifdef USE_OF_IMAGE
+	IBodyFrameReader*	bodyFrameReader;
+	IFaceFrameSource*	faceFrameSources[BODY_COUNT];
+	IFaceFrameReader*	faceFrameReaders[BODY_COUNT];
+
 	ofImage color;
-#else
-	unsigned char *colorBuf;
-	ofTexture colorTex;
-#endif
-		
+	RectI*	faceRects[BODY_COUNT];
+	PointF*	facePoints[BODY_COUNT][FacePointType::FacePointType_Count];
+	DetectionResult* detectionResults[BODY_COUNT][FaceProperty::FaceProperty_Count];
+	Vector4* faceRotations[BODY_COUNT];
+	
+	ofTrueTypeFont verdana30;
 };
 
 // Safe release for interfaces
 template<class Interface>
 inline void SafeRelease(Interface *& pInterfaceToRelease)
 {
-    if (pInterfaceToRelease != NULL)
-    {
-        pInterfaceToRelease->Release();
-        pInterfaceToRelease = NULL;
-    }
+	if (pInterfaceToRelease != NULL)
+	{
+		pInterfaceToRelease->Release();
+		pInterfaceToRelease = NULL;
+	}
 }
