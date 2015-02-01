@@ -377,6 +377,7 @@ void ofApp::DrawFaceFrameResult()
 {
 	ofNoFill();
 	ofSetColor(0, 255, 0);
+	ofSetLineWidth(3);
 	ofPushMatrix();
 	ofScale(cScale, cScale);
 	for (int iFace = 0; iFace < BODY_COUNT; iFace++)
