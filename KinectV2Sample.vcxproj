@@ -69,7 +69,8 @@
       <AdditionalLibraryDirectories>C:\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\NuiDatabase" "$(TargetDir)NuiDatabase" /e /y /i /r
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"
+xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\NuiDatabase" "$(TargetDir)NuiDatabase" /e /y /i /r
 xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\Kinect20.Face.dll" "$(TargetDir)" /c /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -93,7 +94,8 @@ xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\Kinect20.Face.dll" "$(TargetDir)" /c /y
       <AdditionalLibraryDirectories>C:\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\NuiDatabase" "$(TargetDir)NuiDatabase" /e /y /i /r
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"
+xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\NuiDatabase" "$(TargetDir)NuiDatabase" /e /y /i /r
 xcopy "$(KINECTSDK20_DIR)Redist\Face\x86\Kinect20.Face.dll" "$(TargetDir)" /c /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
